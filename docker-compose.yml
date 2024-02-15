@@ -1,16 +1,5 @@
 version: '3'
 services:
-  app:
-    build:
-      context: .
-      target: development
-    volumes:
-      - .:/usr/src/app
-    ports:
-      - 3000:3000
-    env_file:
-      - ./.env
-    command: ["npm", "run", "start:dev"]
   mongo:
     image: mongo:latest
     ports:
@@ -18,3 +7,5 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=example
+    volumes:
+      - ./path/to/your/init-script:/docker-entrypoint-initdb.d

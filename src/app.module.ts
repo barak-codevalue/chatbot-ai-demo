@@ -11,6 +11,7 @@ import { StatisticsService } from './core/statistics.service';
 import { BasicAdminAuthGuard } from './guards/basic-admin-auth.guard';
 import { ScraperService } from './core/scraper.service';
 import { HealthController } from './controllers/health.controller';
+import { IndexService } from './core/index.service';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { HealthController } from './controllers/health.controller';
     ChatService,
     TrainService,
     AiService,
+    IndexService,
     StatisticsService,
     BasicAdminAuthGuard,
     ScraperService,
