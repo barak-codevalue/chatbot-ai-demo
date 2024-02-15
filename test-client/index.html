@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chat App</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="chatClient.js"></script>
+  </head>
+  <body>
+    <div class="chat-container">
+      <h1>Chat App</h1>
+      <div id="chatId" class="chat-id"></div>
+      <div id="chatArea" class="chat-area"></div>
+      <div class="chat-input">
+        <textarea id="messageInput" rows="4"></textarea>
+        <button onclick="controller.postMessage()">Send</button>
+      </div>
+    </div>
+    <div class="admin-section">
+      <h2>Set Admin Credentials</h2>
+
+      <label for="adminUsername">Username:</label>
+      <input type="text" id="adminUsername" />
+      <br />
+
+      <label for="adminPassword">Password:</label>
+      <input type="password" id="adminPassword" />
+      <br />
+
+      <button onclick="controller.setCredentials()">Set Credentials</button>
+      <h2>Admin Functions</h2>
+      <div>
+        <input type="file" id="documentInput" />
+        <button onclick="controller.uploadDocument()">Upload Document</button>
+        <div id="uploadDocumentLoader" class="loader" style="display: none">
+          Uploading...
+        </div>
+        <div id="uploadDocumentSuccess" class="success-message"></div>
+      </div>
+      <div>
+        <label>URLs (comma separated):</label>
+        <input type="text" id="websiteUrls" />
+        <button onclick="controller.trainWebsite()">Train Website</button>
+        <div id="trainWebsiteLoader" class="loader" style="display: none">
+          Training...
+        </div>
+        <div id="trainWebsiteSuccess" class="success-message"></div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+.chat-container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.chat-id {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.chat-area {
+  border: 1px solid #ccc;
+  padding: 20px;
+  height: 300px;
+  overflow-y: auto;
+}
+
+.chat-input {
+  margin-top: 20px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+}
+
+.user-message, .bot-message {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+  }
+  
+  .user-message {
+    background-color: #f1f1f1;
+  }
+  
+  .bot-message {
+    background-color: #e6e6e6;
+  }
+  
