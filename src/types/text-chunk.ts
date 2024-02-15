@@ -1,4 +1,4 @@
-export class TextChunk {
+export interface TextChunk {
   source: string;
   text: string;
 }

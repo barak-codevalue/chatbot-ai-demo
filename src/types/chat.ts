@@ -1,6 +1,6 @@
 import { ChatMessage } from './chat-message';
 
-export class Chat {
+export interface Chat {
   chatId: string;
   messages?: ChatMessage[];
 }

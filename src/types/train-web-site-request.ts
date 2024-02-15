@@ -1,3 +1,3 @@
-export class TrainWebSiteRequest {
+export interface TrainWebSiteRequest {
   urls: string[];
 }

@@ -1,4 +1,4 @@
-export class CompletionResult {
+export interface CompletionResult {
   message: string;
   tokenUsage?: number;
 }

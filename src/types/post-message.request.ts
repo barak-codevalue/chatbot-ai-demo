@@ -1,4 +1,4 @@
-export class PostMessageRequest {
+export interface PostMessageRequest {
   chatId: string;
   message: string;
 }

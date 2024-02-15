@@ -1,9 +1,9 @@
-export class EmbeddingsResult {
+export interface EmbeddingsResult {
   embeddingsItems: EmbeddingsItems[];
   tokenUsage?: number;
 }
 
-export class EmbeddingsItems {
+export interface EmbeddingsItems {
   index: number;
   embeddings: number[];
 }

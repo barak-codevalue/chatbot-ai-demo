@@ -1,3 +1,3 @@
-export class CreateChatResponse {
+export interface CreateChatResponse {
   chatId: string;
 }

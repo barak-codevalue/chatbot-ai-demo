@@ -1,4 +1,4 @@
-export class TokenUsage {
+export interface TokenUsage {
   chatId: string;
   tokens: number;
 }

@@ -1,6 +1,6 @@
 import { RecordMetadata } from '@pinecone-database/pinecone';
 
-export class DataIndex {
+export interface DataIndex {
   embeddings: number[];
   metadata: IndexMetadata;
 }
