@@ -85,7 +85,7 @@ export class IndexService {
 
     const response = await axios.get<PineconeResponse>(url, {
       headers: {
-        'Api-Key': process.env.PINECONE_API_KEY,
+        'Api-Key': this.apiKey,
       },
     });
     const ids = response.data.vectors.map((vector) => vector.id);
