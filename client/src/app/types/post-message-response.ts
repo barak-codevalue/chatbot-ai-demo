@@ -1,8 +1,8 @@
-import { MessageRole } from './message-role';
+import { MessageRole } from "./chat-message";
 
 export interface PostMessageResponse {
-  content: string;
   chatId: string;
+  content: string;
   role: MessageRole;
   createdAt: number;
 }

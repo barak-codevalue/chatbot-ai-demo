@@ -8,6 +8,7 @@ import {
 import { ChatService } from '../services/chat.service';
 import { PostMessageRequest } from 'src/types/post-message.request';
 import { PostMessageResponse } from 'src/types/post-message-response';
+import { ChatMessage } from 'src/types/chat-message';
 
 @Controller('chat')
 export class ChatController {
@@ -17,7 +18,7 @@ export class ChatController {
   async postMessage(
     @Body() postMessage: PostMessageRequest,
   ): Promise<PostMessageResponse> {
-    if (!postMessage.message) {
+    if (!postMessage.content) {
       throw new HttpException('message is required', HttpStatus.BAD_REQUEST);
     }
 
@@ -25,12 +26,14 @@ export class ChatController {
       postMessage.chatId || (await this.chatService.createChat()).chatId;
 
     try {
-      const response = await this.chatService.postMessage(
+      const response: ChatMessage = await this.chatService.postMessage(
         chatId,
-        postMessage.message,
+        postMessage.content,
       );
       return {
-        message: response,
+        content: response.content,
+        createdAt: response.createdAt,
+        role: response.role,
         chatId,
       };
     } catch (error) {

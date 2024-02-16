@@ -1,0 +1,27 @@
+<mat-sidenav-container class="app-container">
+  <mat-sidenav mode="side" opened>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/chat" routerLinkActive="active-link">
+        Chat Demo
+      </a>
+      <!-- <a
+        mat-list-item
+        routerLink="/extract-data"
+        routerLinkActive="active-link"
+      >
+        Extract Data
+      </a> -->
+      <a
+        mat-list-item
+        routerLink="/admin"
+        routerLinkActive="active-link"
+      >
+        Admin
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

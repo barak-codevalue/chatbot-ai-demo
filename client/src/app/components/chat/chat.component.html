@@ -1,0 +1,66 @@
+<div class="chat-container">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Completion Options </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="options-form">
+      <div class="sound-toggle">
+        <mat-slide-toggle color="primary" [formControl]="enabledTextToSpeech">
+          TextToSpeech {{ enabledTextToSpeech.value ? 'Enabled' : 'Disabled' }}
+        </mat-slide-toggle>
+      </div>
+    </div>
+  </mat-expansion-panel>
+  <div class="message-container" #scrollMe>
+    <mat-list class="messages">
+      <mat-list-item
+        *ngFor="let message of messagesSignal()"
+        [ngClass]="message.role"
+        class="message-item"
+      >
+        <div class="message">
+          <div>
+            <mat-icon>{{
+              message.role === 'user' ? 'person' : 'support_agent'
+            }}</mat-icon>
+          </div>
+          <div>{{ message.content }}</div>
+        </div>
+      </mat-list-item>
+      <mat-list-item *ngIf="waitingForResponse">
+        <mat-spinner diameter="20"></mat-spinner>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <div class="message-input">
+    <mat-form-field class="message-field" appearance="fill">
+      <textarea
+        matInput
+        [formControl]="userMessageControl"
+        placeholder="Type your message"
+        matTextareaAutosize
+        matAutosizeMinRows="1"
+        matAutosizeMaxRows="5"
+        (keydown.enter)="sendMessage(); $event.preventDefault()"
+      ></textarea>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      class="send-button"
+      (click)="sendMessage()"
+      [disabled]="waitingForResponse"
+    >
+      Send
+    </button>
+  </div>
+  <button
+    mat-raised-button
+    color="warn"
+    class="clear-button"
+    (click)="clearMessages()"
+  >
+    Clear Chat
+  </button>
+</div>

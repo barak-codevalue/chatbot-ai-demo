@@ -35,7 +35,7 @@ export class ChatService {
     };
   }
 
-  async postMessage(chatId: string, message: string): Promise<string> {
+  async postMessage(chatId: string, message: string): Promise<ChatMessage> {
     const chat = await this.chatRepository.getChat(chatId);
     if (!chat) {
       throw new Error('Chat not found');
@@ -63,7 +63,7 @@ export class ChatService {
 
     await this.chatRepository.addMessage(chatId, responseMessage);
 
-    return response.message;
+    return responseMessage;
   }
 
   private buildMessage(
