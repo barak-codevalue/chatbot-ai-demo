@@ -12,7 +12,8 @@ export class ChatService {
   private apiUrl = 'http://localhost:8080';
   private postMessageEndpoint = `${this.apiUrl}/chat/message`;
   private textToSpeechEndpoint = `${this.apiUrl}/text-to-speech`;
-  private extractFileDataEndpoint = `${this.apiUrl}/extract-file-data`;
+  private trainWithFileEndpoint = `${this.apiUrl}/train/document`;
+  private trainWithWebsiteEndpoint = `${this.apiUrl}/train/website`;
 
   constructor(private http: HttpClient) {}
   async postMessage(messagePost: PostMessageRequest): Promise<ChatMessage> {
@@ -34,12 +35,30 @@ export class ChatService {
     );
   }
 
-  async extractFileData(file: File): Promise<unknown> {
+  async trainWithFile(file: File, credentials: string): Promise<unknown> {
     const formData = new FormData();
     formData.append('file', file, file.name);
 
     return firstValueFrom(
-      this.http.post(this.extractFileDataEndpoint, formData)
+      this.http.post(this.trainWithFileEndpoint, formData, {
+        headers: {
+          Authorization: `Basic ${credentials}`,
+        },
+      })
+    );
+  }
+
+  async trainSiteUrl(url: string, credentials: string): Promise<unknown> {
+    return firstValueFrom(
+      this.http.post(
+        this.trainWithWebsiteEndpoint,
+        { url },
+        {
+          headers: {
+            Authorization: `Basic ${credentials}`,
+          },
+        }
+      )
     );
   }
 }

@@ -1,0 +1,15 @@
+.admin-section {
+    max-width: 600px;
+    margin: auto;
+  
+    .section-divider {
+      margin: 20px 0; // Adjust the space as needed
+    }
+  
+    .upload-section, .train-section {
+      display: flex;
+      align-items: center;
+      gap: 10px; // Space between the input and the button
+    }
+  }
+  

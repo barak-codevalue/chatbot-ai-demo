@@ -5,14 +5,10 @@ import { TextChunk } from 'src/types/text-chunk';
 
 @Injectable()
 export class ScraperService {
-  async scrapeWebsite(urls: string[]): Promise<TextChunk[]> {
-    const paragraphs = await this.scrape(urls);
+  async scrapeWebsite(url: string): Promise<TextChunk[]> {
+    const links = await this.getLinks(url, url, 1);
+    const paragraphs = await this.scrape(links);
     return paragraphs;
-  }
-
-  async scrapeWebsiteLinks(url: string, depth: number): Promise<string[]> {
-    const links = await this.getLinks(url, url, depth);
-    return links;
   }
 
   private async scrape(urls: string[]): Promise<TextChunk[]> {

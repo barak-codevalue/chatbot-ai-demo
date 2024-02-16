@@ -13,8 +13,8 @@ export class TrainService {
     private readonly aiService: AiService,
     private readonly indexService: IndexService,
   ) {}
-  async indexSite(urls: string[]) {
-    const paragraphs = await this.scraperService.scrapeWebsite(urls);
+  async indexSite(url: string) {
+    const paragraphs = await this.scraperService.scrapeWebsite(url);
     await this.indexText(paragraphs);
   }
 

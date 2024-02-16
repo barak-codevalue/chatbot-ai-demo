@@ -37,14 +37,6 @@ export class TrainController {
 
   @Post('/website')
   async trainWebSite(@Body() trainWebSiteRequest: TrainWebSiteRequest) {
-    await this.trainService.indexSite(trainWebSiteRequest.urls);
-  }
-
-  @Post('/website-urls')
-  async webSiteUrls(@Body() webSiteUrlsRequest: WebSiteUrlsRequest) {
-    return await this.scraperService.scrapeWebsiteLinks(
-      webSiteUrlsRequest.url,
-      webSiteUrlsRequest.depth,
-    );
+    await this.trainService.indexSite(trainWebSiteRequest.url);
   }
 }

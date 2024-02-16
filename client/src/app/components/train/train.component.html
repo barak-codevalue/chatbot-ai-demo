@@ -1,0 +1,49 @@
+<mat-card class="admin-section">
+  <mat-card-title>Set Admin Credentials</mat-card-title>
+
+  <mat-form-field>
+    <mat-label>Username:</mat-label>
+    <input matInput [(ngModel)]="adminUsername" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Password:</mat-label>
+    <input matInput [(ngModel)]="adminPassword" type="password" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="setCredentials()">
+    Set Credentials
+  </button>
+
+  <div class="section-divider"></div>
+  <!-- Divider for spacing -->
+
+  <mat-card-title>Admin Functions</mat-card-title>
+
+  <div class="upload-section">
+    <input type="file" (change)="onFileSelected($event)" />
+    <button mat-raised-button color="primary" (click)="uploadDocument()">
+      Upload Document
+    </button>
+  </div>
+  <mat-progress-spinner
+    *ngIf="isUploading"
+    mode="indeterminate"
+  ></mat-progress-spinner>
+  <span *ngIf="uploadSuccessMessage">{{ uploadSuccessMessage }}</span>
+
+  <div class="train-section">
+    <mat-form-field>
+      <mat-label>URL:</mat-label>
+      <input matInput [(ngModel)]="websiteUrl" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="trainWebsite()">
+      Train Website
+    </button>
+  </div>
+  <mat-progress-spinner
+    *ngIf="isTraining"
+    mode="indeterminate"
+  ></mat-progress-spinner>
+  <span *ngIf="trainSuccessMessage">{{ trainSuccessMessage }}</span>
+</mat-card>

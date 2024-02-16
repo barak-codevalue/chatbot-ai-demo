@@ -1,3 +1,3 @@
 export interface TrainWebSiteRequest {
-  urls: string[];
+  url: string;
 }
