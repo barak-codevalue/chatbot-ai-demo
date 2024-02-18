@@ -14,6 +14,8 @@ export class ChatService {
   private textToSpeechEndpoint = `${this.apiUrl}/text-to-speech`;
   private trainWithFileEndpoint = `${this.apiUrl}/train/document`;
   private trainWithWebsiteEndpoint = `${this.apiUrl}/train/website`;
+  private adminUsername = 'admin';
+  private adminPassword = '6~VVkW%Yo?gbnKoAoI7MR32LE@';
 
   constructor(private http: HttpClient) {}
   async postMessage(messagePost: PostMessageRequest): Promise<ChatMessage> {
@@ -35,27 +37,31 @@ export class ChatService {
     );
   }
 
-  async trainWithFile(file: File, credentials: string): Promise<unknown> {
+  async trainWithFile(file: File): Promise<unknown> {
     const formData = new FormData();
     formData.append('file', file, file.name);
 
     return firstValueFrom(
       this.http.post(this.trainWithFileEndpoint, formData, {
         headers: {
-          Authorization: `Basic ${credentials}`,
+          Authorization: `Basic ${btoa(
+            `${this.adminUsername}:${this.adminPassword}`
+          )}`,
         },
       })
     );
   }
 
-  async trainSiteUrl(url: string, credentials: string): Promise<unknown> {
+  async trainSiteUrl(url: string): Promise<unknown> {
     return firstValueFrom(
       this.http.post(
         this.trainWithWebsiteEndpoint,
         { url },
         {
           headers: {
-            Authorization: `Basic ${credentials}`,
+            Authorization: `Basic ${btoa(
+              `${this.adminUsername}:${this.adminPassword}`
+            )}`,
           },
         }
       )

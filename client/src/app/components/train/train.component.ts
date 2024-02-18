@@ -6,11 +6,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'chat-ai-demo-train',
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule,
     MatCardModule,
     MatFormFieldModule,
@@ -22,21 +24,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   styleUrl: './train.component.scss',
 })
 export class TrainComponent {
-  adminUsername: string = '';
-  adminPassword: string = '';
   websiteUrl: string = '';
   selectedFile: File | null = null;
   isUploading: boolean = false;
   isTraining: boolean = false;
   uploadSuccessMessage: string = '';
   trainSuccessMessage: string = '';
-  adminCredentials: string = '';
 
   constructor(private chatService: ChatService) {}
-
-  setCredentials() {
-    this.adminCredentials = btoa(`${this.adminUsername}:${this.adminPassword}`);
-  }
 
   onFileSelected(event: Event) {
     const element = event.currentTarget as HTMLInputElement;
@@ -53,10 +48,7 @@ export class TrainComponent {
 
     this.isUploading = true;
     try {
-      await this.chatService.trainWithFile(
-        this.selectedFile,
-        this.adminCredentials
-      );
+      await this.chatService.trainWithFile(this.selectedFile);
       this.uploadSuccessMessage = 'Document uploaded successfully!';
     } catch (error) {
       console.error('Error uploading document:', error);
@@ -69,7 +61,7 @@ export class TrainComponent {
   async trainWebsite() {
     this.isTraining = true;
     try {
-      this.chatService.trainSiteUrl(this.websiteUrl, this.adminCredentials);
+      this.chatService.trainSiteUrl(this.websiteUrl);
       this.trainSuccessMessage = 'Website trained successfully!';
     } catch (error) {
       console.error('Error training website:', error);

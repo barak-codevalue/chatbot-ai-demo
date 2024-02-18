@@ -1,49 +1,47 @@
-<mat-card class="admin-section">
-  <mat-card-title>Set Admin Credentials</mat-card-title>
+<mat-card class="train-section">
+  <mat-card-title>Train</mat-card-title>
 
-  <mat-form-field>
-    <mat-label>Username:</mat-label>
-    <input matInput [(ngModel)]="adminUsername" />
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Password:</mat-label>
-    <input matInput [(ngModel)]="adminPassword" type="password" />
-  </mat-form-field>
-
-  <button mat-raised-button color="primary" (click)="setCredentials()">
-    Set Credentials
-  </button>
-
-  <div class="section-divider"></div>
-  <!-- Divider for spacing -->
-
-  <mat-card-title>Admin Functions</mat-card-title>
-
-  <div class="upload-section">
-    <input type="file" (change)="onFileSelected($event)" />
-    <button mat-raised-button color="primary" (click)="uploadDocument()">
-      Upload Document
+  <div class="train-document-section flex flex-col gap-2">
+    <input type="file" class="mb-2" (change)="onFileSelected($event)" />
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="isUploading"
+      class="mb-2"
+      (click)="uploadDocument()"
+    >
+      Train With Document
     </button>
+    <span *ngIf="isUploading">
+      <mat-progress-spinner
+        [diameter]="30"
+        mode="indeterminate"
+      ></mat-progress-spinner>
+    </span>
   </div>
-  <mat-progress-spinner
-    *ngIf="isUploading"
-    mode="indeterminate"
-  ></mat-progress-spinner>
+
   <span *ngIf="uploadSuccessMessage">{{ uploadSuccessMessage }}</span>
 
-  <div class="train-section">
+  <div class="section-divider"></div>
+
+  <div class="train-web-section">
     <mat-form-field>
       <mat-label>URL:</mat-label>
       <input matInput [(ngModel)]="websiteUrl" />
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="trainWebsite()">
-      Train Website
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="isTraining"
+      (click)="trainWebsite()"
+    >
+      Train With Website
     </button>
+    <mat-progress-spinner
+      *ngIf="isTraining"
+      [diameter]="12"
+      mode="indeterminate"
+    ></mat-progress-spinner>
   </div>
-  <mat-progress-spinner
-    *ngIf="isTraining"
-    mode="indeterminate"
-  ></mat-progress-spinner>
   <span *ngIf="trainSuccessMessage">{{ trainSuccessMessage }}</span>
 </mat-card>
