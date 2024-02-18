@@ -71,7 +71,7 @@ export class ChatComponent {
     if (!userMessage || userMessage.trim() === '') {
       return;
     }
-    this.textToSpeech(userMessage, 'en-US-DavisNeural');
+    this.textToSpeech(userMessage, 'nova');
     this.updateChatMessages({
       role: 'user',
       content: userMessage,
@@ -92,7 +92,7 @@ export class ChatComponent {
         this.chatId = completionResponse.chatId;
       }
 
-      await this.textToSpeech(completionResponse.content);
+      await this.textToSpeech(completionResponse.content, 'alloy');
       this.updateChatMessages(completionResponse);
     } catch (err) {
       console.error(err);
@@ -137,7 +137,10 @@ export class ChatComponent {
     this.messagesSignal.update((messages) => [...messages, message]);
   }
 
-  async textToSpeech(text: string, speechVoice?: string) {
+  async textToSpeech(
+    text: string,
+    speechVoice: 'alloy' | 'echo' | 'fable' | 'onyx' | 'nova' | 'shimmer'
+  ) {
     if (!this.enabledTextToSpeech.value) {
       return;
     }

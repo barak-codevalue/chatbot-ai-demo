@@ -12,6 +12,7 @@ import { BasicAdminAuthGuard } from './guards/basic-admin-auth.guard';
 import { ScraperService } from './core/scraper.service';
 import { HealthController } from './controllers/health.controller';
 import { IndexService } from './core/index.service';
+import { SpeechController } from './controllers/speech.controller';
 
 @Module({
   imports: [
@@ -26,7 +27,12 @@ import { IndexService } from './core/index.service';
       inject: [ConfigService],
     }),
   ],
-  controllers: [ChatController, TrainController, HealthController],
+  controllers: [
+    ChatController,
+    TrainController,
+    HealthController,
+    SpeechController,
+  ],
   providers: [
     ChatService,
     TrainService,

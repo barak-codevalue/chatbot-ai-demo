@@ -11,7 +11,7 @@ import { ChatMessage } from '../types/chat-message';
 export class ChatService {
   private apiUrl = 'http://localhost:8080';
   private postMessageEndpoint = `${this.apiUrl}/chat/message`;
-  private textToSpeechEndpoint = `${this.apiUrl}/text-to-speech`;
+  private textToSpeechEndpoint = `${this.apiUrl}/speech/text-to-speech`;
   private trainWithFileEndpoint = `${this.apiUrl}/train/document`;
   private trainWithWebsiteEndpoint = `${this.apiUrl}/train/website`;
   private adminUsername = 'admin';

@@ -8,7 +8,7 @@ import { EmbeddingsItems, EmbeddingsResult } from 'src/types/embeddings-result';
 
 @Injectable()
 export class AiService {
-  private readonly client: OpenAI;
+  private readonly openai: OpenAI;
   private readonly maxTokens: number;
   constructor(private readonly configService: ConfigService) {
     const apiKey = this.configService.get<string>('OPENAI_API_KEY');
@@ -16,7 +16,7 @@ export class AiService {
       this.configService.get<string>('COMPLETION_MAX_TOKENS') || '150',
     );
 
-    this.client = new OpenAI({
+    this.openai = new OpenAI({
       apiKey: apiKey,
     });
   }
@@ -30,7 +30,7 @@ export class AiService {
         content: message.content,
       }),
     );
-    const result = await this.client.chat.completions.create({
+    const result = await this.openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages,
       max_tokens: this.maxTokens,
@@ -63,7 +63,7 @@ export class AiService {
     try {
       await Promise.all(
         batches.map(async (batch) => {
-          const embeddingsResult = await this.client.embeddings.create({
+          const embeddingsResult = await this.openai.embeddings.create({
             model: 'text-embedding-3-small',
             input: batch.inputs,
           });
@@ -85,5 +85,18 @@ export class AiService {
       embeddingsItems: allEmbeddingsItems,
       tokenUsage: totalTokenUsage,
     };
+  }
+
+  async textToSpeech(
+    text: string,
+    voice?: 'alloy' | 'echo' | 'fable' | 'onyx' | 'nova' | 'shimmer',
+  ): Promise<Buffer> {
+    const mp3 = await this.openai.audio.speech.create({
+      model: 'tts-1',
+      voice: voice ?? 'alloy',
+      input: text,
+    });
+    const buffer = Buffer.from(await mp3.arrayBuffer());
+    return buffer;
   }
 }
