@@ -71,7 +71,7 @@ export class ChatComponent {
     if (!userMessage || userMessage.trim() === '') {
       return;
     }
-    this.textToSpeech(userMessage, 'nova');
+    this.textToSpeech(userMessage, 'shimmer');
     this.updateChatMessages({
       role: 'user',
       content: userMessage,
