@@ -15,7 +15,7 @@ export class ChatService {
   private trainWithFileEndpoint = `${this.apiUrl}/train/document`;
   private trainWithWebsiteEndpoint = `${this.apiUrl}/train/website`;
   private adminUsername = 'admin';
-  private adminPassword = '6~VVkW%Yo?gbnKoAoI7MR32LE@';
+  private adminPassword = 'ShouldImplementLogin';
 
   constructor(private http: HttpClient) {}
   async postMessage(messagePost: PostMessageRequest): Promise<ChatMessage> {
