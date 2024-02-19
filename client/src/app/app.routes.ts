@@ -6,6 +6,6 @@ import { TrainComponent } from './components/train/train.component';
 export const appRoutes: Route[] = [
   { path: '', redirectTo: '/chat', pathMatch: 'full' },
   { path: 'chat', component: ChatComponent },
-  { path: 'train', component: TrainComponent },
+  { path: 'external', component: TrainComponent },
   { path: 'admin', component: AdminComponent },
 ];

@@ -53,7 +53,7 @@ export class ChatComponent {
 
   userMessageControl = new FormControl('');
 
-  enabledTextToSpeech = new FormControl(false);
+  enabledTextToSpeech = new FormControl(true);
 
   //ngrx /redux is foya!
   messagesSignal = signal<ChatMessage[]>(this.loadMessageHistory());
