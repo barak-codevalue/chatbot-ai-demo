@@ -11,7 +11,6 @@ import { ScraperService } from 'src/core/scraper.service';
 import { BasicAdminAuthGuard } from 'src/guards/basic-admin-auth.guard';
 import { TrainService } from 'src/services/train.service';
 import { TrainWebSiteRequest } from 'src/types/train-web-site-request';
-import { WebSiteUrlsRequest } from 'src/types/web-site-urls-request';
 
 @Controller('train')
 @UseGuards(BasicAdminAuthGuard)
