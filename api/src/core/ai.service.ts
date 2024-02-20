@@ -34,6 +34,7 @@ export class AiService {
       model: 'gpt-3.5-turbo',
       messages,
       max_tokens: this.maxTokens,
+      // tools: []  <<-------------------- tools are cool!
     });
 
     const completion = result.choices[0].message?.content;
