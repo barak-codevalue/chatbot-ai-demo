@@ -41,6 +41,12 @@ export class AiService {
     if (!completion) {
       throw new Error('failed to generate completion');
     }
+
+    console.log('-----------------createCompletions-----------------');
+    console.log('messages:', messages);
+    console.log('completion:', completion);
+    console.log('---------------------------------------------------');
+
     const totalTokens = result.usage?.total_tokens || 0;
     return {
       message: completion,

@@ -97,7 +97,12 @@ export class ChatService {
       console.info('Client message', message);
       console.info('Context', fitContext);
 
-      return CHAT_CONTEXT.replace('{context}', fitContext);
+      const chatContext = CHAT_CONTEXT.replace('{context}', fitContext);
+      console.log('-------------chatContext---------------');
+      console.log(chatContext);
+      console.log('---------------------------------------');
+
+      return chatContext;
     } catch (error) {
       console.error('filed to generateContext', error);
       return CHAT_CONTEXT;
@@ -109,7 +114,7 @@ export class ChatService {
   ): ChatMessage[] {
     const messageHistory = [];
     const reversMessages = [...messages].sort(
-      (a, b) => b.createdAt - a.createdAt,
+      (a, b) => a.createdAt - b.createdAt,
     );
     let historyTokensCount = 0;
     for (const message of reversMessages) {

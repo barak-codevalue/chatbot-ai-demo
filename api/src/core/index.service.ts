@@ -70,7 +70,8 @@ export class IndexService {
     console.info('-----------------result.matches-----------------');
     console.info(result.matches);
     console.info('------------------------------------------------');
-    return result.matches.map((record) => record.metadata.text as string);
+    const relevantRecords = result.matches.filter((match) => match.score > 0.4);
+    return relevantRecords.map((record) => record.metadata.text as string);
   }
 
   private async getPineconeRecordsWithPrefix(

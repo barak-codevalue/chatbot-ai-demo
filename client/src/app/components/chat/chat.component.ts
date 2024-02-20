@@ -62,7 +62,7 @@ export class ChatComponent {
     this.saveMessageHistory(this.messagesSignal());
   });
 
-  chatId: string = '';
+  chatId?: string;
 
   constructor(private chatService: ChatService) {}
 
@@ -76,7 +76,7 @@ export class ChatComponent {
       role: 'user',
       content: userMessage,
       createdAt: Date.now(),
-      chatId: this.chatId,
+      chatId: this.chatId ?? '',
     });
 
     this.userMessageControl.setValue('');
@@ -104,6 +104,7 @@ export class ChatComponent {
   clearMessages() {
     this.pauseSpeech();
     this.messagesSignal.set([]);
+    this.chatId = undefined;
     localStorage.removeItem('chat');
   }
 
@@ -118,7 +119,7 @@ export class ChatComponent {
   loadMessageHistory(): ChatMessage[] {
     const storedChat = localStorage.getItem('chat');
     const chat = storedChat ? JSON.parse(storedChat) : null;
-    this.chatId = chat?.chatId ?? '';
+    this.chatId = chat?.chatId;
     return chat?.messages ?? [];
   }
 
