@@ -81,7 +81,10 @@ export class AiService {
     } catch (error) {
       console.error('Error failed to createEmbeddings', error);
     }
-
+    console.info('-----------------embeddings-----------------');
+    console.info(inputs);
+    console.info(allEmbeddingsItems.map((item) => item.embeddings));
+    console.info('------------------------------------------------');
     return {
       embeddingsItems: allEmbeddingsItems,
       tokenUsage: totalTokenUsage,
