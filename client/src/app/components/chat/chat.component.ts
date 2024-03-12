@@ -46,6 +46,7 @@ import { ChatMessage } from '../../types/chat-message';
 export class ChatComponent {
   @ViewChild('scrollMe')
   private myScrollContainer!: ElementRef;
+  private settings = { enabledTextToSpeech: true, enabledPrompt: false };
 
   audioPlayer = this.initAudioPlayer();
 
@@ -53,7 +54,9 @@ export class ChatComponent {
 
   userMessageControl = new FormControl('');
 
-  enabledTextToSpeech = new FormControl(true);
+  enabledTextToSpeech = new FormControl(this.settings.enabledTextToSpeech);
+
+  enabledPrompt = new FormControl(this.settings.enabledPrompt);
 
   //ngrx /redux is foya!
   messagesSignal = signal<ChatMessage[]>(this.loadMessageHistory());
@@ -64,7 +67,21 @@ export class ChatComponent {
 
   chatId?: string;
 
-  constructor(private chatService: ChatService) {}
+  constructor(private chatService: ChatService) {
+    const loadedSettings = this.loadSettings();
+    this.settings = { ...this.settings, ...loadedSettings };
+    this.enabledTextToSpeech.setValue(
+      this.settings?.enabledTextToSpeech ?? true
+    );
+    this.enabledPrompt.setValue(this.settings?.enabledPrompt ?? false);
+
+    this.enabledTextToSpeech.valueChanges.subscribe((value) => {
+      this.saveSettings({ ...this.settings, enabledTextToSpeech: !!value });
+    });
+    this.enabledPrompt.valueChanges.subscribe((value) => {
+      this.saveSettings({ ...this.settings, enabledPrompt: !!value });
+    });
+  }
 
   async sendMessage() {
     const userMessage = this.userMessageControl.value;
@@ -121,6 +138,22 @@ export class ChatComponent {
     const chat = storedChat ? JSON.parse(storedChat) : null;
     this.chatId = chat?.chatId;
     return chat?.messages ?? [];
+  }
+
+  loadSettings(): { enabledTextToSpeech: boolean; enabledPrompt: boolean } {
+    const storageSettings = localStorage.getItem('settings');
+    const settings = storageSettings ? JSON.parse(storageSettings) : null;
+    return {
+      enabledTextToSpeech: settings?.enabledTextToSpeech,
+      enabledPrompt: settings?.enabledPrompt,
+    };
+  }
+
+  saveSettings(settings: {
+    enabledTextToSpeech: boolean;
+    enabledPrompt: boolean;
+  }) {
+    localStorage.setItem('settings', JSON.stringify(settings));
   }
 
   scrollToBottom(): void {
