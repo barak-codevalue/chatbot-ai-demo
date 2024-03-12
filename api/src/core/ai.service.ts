@@ -34,6 +34,7 @@ export class AiService {
       model: 'gpt-3.5-turbo',
       messages,
       max_tokens: this.maxTokens,
+      temperature: 0.2,
       // tools: []  <<-------------------- tools are cool!
     });
 
