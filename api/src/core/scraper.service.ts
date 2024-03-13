@@ -19,7 +19,7 @@ export class ScraperService {
         const { data } = await axios.get(url);
         const $ = load(data);
 
-        $('p').each((index, element) => {
+        $('p').each((_index, element) => {
           const paragraph = $(element).text();
           const words = paragraph.split(' ');
           if (words.length < 4) return;
