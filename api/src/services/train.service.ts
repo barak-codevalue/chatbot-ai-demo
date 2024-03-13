@@ -39,7 +39,6 @@ export class TrainService {
   }
 
   private async indexText(textChunks: TextChunk[]) {
-    const uniqueSources = Array.from(new Set(textChunks.map((t) => t.source)));
     const textArray = textChunks.map((p) => p.text);
     const embeddings = await this.aiService.createEmbeddings(textArray);
     const indexedParagraphs: DataIndex[] = embeddings.embeddingsItems.map(
@@ -56,6 +55,7 @@ export class TrainService {
       },
     );
 
+    const uniqueSources = Array.from(new Set(textChunks.map((t) => t.source)));
     await this.indexService.removeIndexBySource(uniqueSources);
     console.info('Indexing data');
     await this.indexService.indexData(indexedParagraphs);
