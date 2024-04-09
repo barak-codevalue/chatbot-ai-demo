@@ -1,8 +1,8 @@
 {
-  "name": "nest-typescript-starter",
+  "name": "AI-Chat-Demo",
   "private": true,
   "version": "1.0.0",
-  "description": "Nest TypeScript starter repository",
+  "description": "LLM RAG empale API",
   "license": "MIT",
   "scripts": {
     "build": "nest build",
